@@ -1,0 +1,10 @@
+c:\users\theone\documents\visual studio 2010\Projects\PhysicsEmulation\PhysicsEmulation\obj\x86\Debug\PhysicsEmulation.csprojResolveAssemblyReference.cache
+c:\users\theone\documents\visual studio 2010\Projects\PhysicsEmulation\PhysicsEmulation\obj\x86\Debug\PhysicsEmulation.Form1.resources
+c:\users\theone\documents\visual studio 2010\Projects\PhysicsEmulation\PhysicsEmulation\obj\x86\Debug\PhysicsEmulation.Properties.Resources.resources
+c:\users\theone\documents\visual studio 2010\Projects\PhysicsEmulation\PhysicsEmulation\obj\x86\Debug\PhysicsEmulation.csproj.GenerateResource.Cache
+c:\users\theone\documents\visual studio 2010\Projects\PhysicsEmulation\PhysicsEmulation\bin\Debug\PhysicsEmulation.exe
+c:\users\theone\documents\visual studio 2010\Projects\PhysicsEmulation\PhysicsEmulation\bin\Debug\PhysicsEmulation.pdb
+c:\users\theone\documents\visual studio 2010\Projects\PhysicsEmulation\PhysicsEmulation\obj\x86\Debug\PhysicsEmulation.exe
+c:\users\theone\documents\visual studio 2010\Projects\PhysicsEmulation\PhysicsEmulation\obj\x86\Debug\PhysicsEmulation.pdb
+c:\users\theone\documents\visual studio 2010\Projects\PhysicsEmulation\PhysicsEmulation\bin\Debug\Engine2D.dll
+c:\users\theone\documents\visual studio 2010\Projects\PhysicsEmulation\PhysicsEmulation\bin\Debug\Engine2D.pdb
