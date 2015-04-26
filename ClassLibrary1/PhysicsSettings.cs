@@ -13,9 +13,6 @@ namespace Engine2D
         public static Vector CameraPosition = new Vector(0.0f, 0.0f);
         public static Vector Wind = new Vector(0.0f, 0.0f);
 
-
-
-
     }
 
 }

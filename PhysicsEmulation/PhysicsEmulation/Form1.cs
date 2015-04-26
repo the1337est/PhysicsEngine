@@ -16,8 +16,6 @@ namespace PhysicsEmulation
 
         PhysicsEngine PhysicsEngine;
         
-
-
         public Form1()
         {
 
@@ -27,22 +25,31 @@ namespace PhysicsEmulation
 
             DoubleBuffered = true;
 
-            PhysicsEngine = new PhysicsEngine();
+            PhysicsEngine = new PhysicsEngine(Log);
 
             GameTimer.Tick += new EventHandler(GameTimer_Tick);
 
-            Polygon p = new Polygon();
+            Polygon p = new Polygon();  
             p.Points.Add(new Vector(-100, -100));
             p.Points.Add(new Vector(100, -100));
             p.Points.Add(new Vector(100, 100));
             p.Points.Add(new Vector(-100, 100));
 
-            p.Offset(300, 400);
+            p.Offset(300, 0);
            
             PhysicsEngine.PhysicsObjects.Add(new PhysicsObject(new Vector(400, 300), p, new Rigidbody()));
 
+            Polygon pg = new Polygon();
+            pg.Points.Add(new Vector(-30, -50));
+            pg.Points.Add(new Vector(50, -70));
+            pg.Points.Add(new Vector(30, 50));
+            pg.Points.Add(new Vector(-60, 40));
 
-            p = new Polygon();
+            pg.Offset(400, 200);
+            
+            PhysicsEngine.PhysicsObjects.Add(new PhysicsObject(new Vector(100, 200), pg, new Rigidbody()));
+
+            p = new Polygon(); 
             p.Points.Add(new Vector(0, 580));
             p.Points.Add(new Vector(800, 580));
             p.Points.Add(new Vector(800, 600));
@@ -58,6 +65,13 @@ namespace PhysicsEmulation
             }
             GameTimer.Interval = 16;
             GameTimer.Start();
+
+        }
+
+        void Log(string message)
+        {
+
+            System.Diagnostics.Debug.WriteLine(message);
 
         }
 
@@ -81,8 +95,11 @@ namespace PhysicsEmulation
 
         void Form1_Paint(object sender, PaintEventArgs e)
         {
+            
+            PhysicsEngine.PhysicsObjects[0].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 5.0f;
+            PhysicsEngine.PhysicsObjects[1].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 5.0f;
 
-            PhysicsEngine.PhysicsObjects[0].Polygon.Offset(PhysicsSettings.Gravity * 0.016f * 5.0f);
+            //PhysicsEngine.PhysicsObjects[0].Polygon.Offset(PhysicsSettings.Gravity * 0.016f * 5.0f);
 
             /*foreach (PhysicsObject po in PhysicsEngine.PhysicsObjects)
             {

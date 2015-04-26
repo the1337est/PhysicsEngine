@@ -19,7 +19,7 @@ namespace Engine2D
 
         public event OnLogHandler OnLog;
 
-        public PhysicsEngine()
+        public PhysicsEngine(OnLogHandler logTarget)
         {
 
             if (Instance == null)
@@ -29,6 +29,9 @@ namespace Engine2D
 
             }
 
+            OnLog += logTarget;
+
+            Log("Physics Engine started.");
            
         }
 
@@ -41,8 +44,7 @@ namespace Engine2D
                 foreach (PhysicsObject p2 in PhysicsObjects)
                 {
 
-                    if (p1 == p2) continue;//yeah :D
-                    //yeah xD
+                    if (p1 == p2) continue;
 
                     PolygonCollisionResult r = PolygonCollision(p1.Polygon, p2.Polygon, p1.Rigidbody.Velocity);
 
@@ -51,11 +53,17 @@ namespace Engine2D
                     if (r.WillIntersect)
                     {
 
+                        Log(string.Format("Intersection found. ({0}, {1})", p1.ToString(), p2.ToString()));
                         collisionTranslation = p1.Rigidbody.Velocity + r.MinimumTranslationVector;
-                        break;
+
+                        //this is not a final wanted behaviour
+                        p1.Rigidbody.Velocity = new Vector(0, 0);//on collision, set velocity to zero lol. This should depend on the angle of collision tbhkk
 
                     }
-
+                    //if there's no intersection move by velocitykk
+                    p1.Polygon.Offset(collisionTranslation);
+                    p1.Position += collisionTranslation;
+                    //cant remember if offset takes care of position
                 }
                 
             }
@@ -196,7 +204,7 @@ namespace Engine2D
                 if (Instance.OnLog != null)
                 {
 
-                    Instance.OnLog(message);
+                    Instance.OnLog(message);//lol
 
                 }
 
