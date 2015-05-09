@@ -50,10 +50,10 @@ namespace PhysicsEmulation
             PhysicsEngine.PhysicsObjects.Add(new PhysicsObject(new Vector(100, 200), pg, new Rigidbody()));
 
             p = new Polygon(); 
-            p.Points.Add(new Vector(0, 580));
-            p.Points.Add(new Vector(800, 580));
-            p.Points.Add(new Vector(800, 600));
-            p.Points.Add(new Vector(0, 600));
+            p.Points.Add(new Vector(0, 740));
+            p.Points.Add(new Vector(1024, 740));
+            p.Points.Add(new Vector(1024, 768));
+            p.Points.Add(new Vector(0, 768));
 
             PhysicsEngine.PhysicsObjects.Add(new PhysicsObject(new Vector(0,0), p, new Rigidbody()));
 
@@ -79,7 +79,7 @@ namespace PhysicsEmulation
         {
 
             Text = "Physics emulation";
-            ClientSize = new Size(800, 600);
+            ClientSize = new Size(1024, 768);
             MaximizeBox = false;
             MaximumSize = Size;
             MinimumSize = Size;
@@ -96,8 +96,8 @@ namespace PhysicsEmulation
         void Form1_Paint(object sender, PaintEventArgs e)
         {
             
-            PhysicsEngine.PhysicsObjects[0].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 5.0f;
-            PhysicsEngine.PhysicsObjects[1].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 5.0f;
+            PhysicsEngine.PhysicsObjects[0].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 4.5f;
+            PhysicsEngine.PhysicsObjects[1].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 4.5f;
 
             //PhysicsEngine.PhysicsObjects[0].Polygon.Offset(PhysicsSettings.Gravity * 0.016f * 5.0f);
 
@@ -136,6 +136,20 @@ namespace PhysicsEmulation
                 }
 
             }
+            label1.Text = "Polygon 1 Position: " + PhysicsEngine.PhysicsObjects[0].Position;
+            label2.Text = "Polygon 2 Position: " + PhysicsEngine.PhysicsObjects[1].Position;
+
+
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            float x, y;
+            x = MousePosition.X;
+            y = MousePosition.Y;
+            Vector v = new Vector(x, y);
+            //label3.Text = Convert.ToString(MousePosition);
+            PhysicsEngine.PhysicsObjects[1].Position = v;
 
         }
 

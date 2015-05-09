@@ -8,7 +8,7 @@ namespace Engine2D
 
     public class PhysicsObject 
     {
-        //When we assign a Rigidbody to this object, we assign this object as the parent
+        
         public Rigidbody Rigidbody;
         public Polygon Polygon;
         public Vector Position;

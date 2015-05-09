@@ -11,7 +11,6 @@ namespace Engine2D
     {
 
         public List<PhysicsObject> PhysicsObjects = new List<PhysicsObject>();
-        //lol do u hear my brother xD'' yeah, is that Truls? no my brother xD xD
 
         public static PhysicsEngine Instance;
 
@@ -56,21 +55,20 @@ namespace Engine2D
                         Log(string.Format("Intersection found. ({0}, {1})", p1.ToString(), p2.ToString()));
                         collisionTranslation = p1.Rigidbody.Velocity + r.MinimumTranslationVector;
 
-                        //this is not a final wanted behaviour
-                        p1.Rigidbody.Velocity = new Vector(0, 0);//on collision, set velocity to zero lol. This should depend on the angle of collision tbhkk
+
+                        p1.Rigidbody.Velocity = new Vector(0, 0);
 
                     }
-                    //if there's no intersection move by velocitykk
+
                     p1.Polygon.Offset(collisionTranslation);
                     p1.Position += collisionTranslation;
-                    //cant remember if offset takes care of position
+                
                 }
                 
             }
 
         }
 
-        // Check if polygon A is going to collide with polygon B for the given velocity
         public PolygonCollisionResult PolygonCollision(Polygon polygonA, Polygon polygonB, Vector velocity)
         {
 
@@ -80,26 +78,31 @@ namespace Engine2D
 
             int edgeCountA = polygonA.Edges.Count;
             int edgeCountB = polygonB.Edges.Count;
-            //
+
             float minIntervalDistance = float.PositiveInfinity;
             Vector translationAxis = new Vector();
             Vector edge;
 
-            // Loop through all the edges of both polygons
             for (int edgeIndex = 0; edgeIndex < edgeCountA + edgeCountB; edgeIndex++)
             {
+
                 if (edgeIndex < edgeCountA)
                 {
+
                     edge = polygonA.Edges[edgeIndex];
+
                 }
                 else
                 {
+
                     edge = polygonB.Edges[edgeIndex - edgeCountA];
+
                 }
+
+
 
                 // ===== 1. Find if the polygons are currently intersecting =====
 
-                // Find the axis perpendicular to the current edge
                 Vector axis = new Vector(-edge.Y, edge.X);
                 axis.Normalize();
 
@@ -119,11 +122,15 @@ namespace Engine2D
                 // Get the projection of polygon A during the movement
                 if (velocityProjection < 0)
                 {
+
                     minA += velocityProjection;
+
                 }
                 else
                 {
+
                     maxA += velocityProjection;
+
                 }
 
                 // Do the same test as above for the new projection
@@ -139,12 +146,15 @@ namespace Engine2D
                 intervalDistance = Math.Abs(intervalDistance);
                 if (intervalDistance < minIntervalDistance)
                 {
+
                     minIntervalDistance = intervalDistance;
                     translationAxis = axis;
 
                     Vector d = polygonA.Center - polygonB.Center;
                     if (d.DotProduct(translationAxis) < 0) translationAxis = -translationAxis;
+
                 }
+
             }
 
             // The minimum translation vector can be used to push the polygons appart.
@@ -153,44 +163,61 @@ namespace Engine2D
             if (result.WillIntersect) result.MinimumTranslationVector = translationAxis * minIntervalDistance;
 
             return result;
+        
         }
 
         // Calculate the distance between [minA, maxA] and [minB, maxB]
         // The distance will be negative if the intervals overlap
         public float IntervalDistance(float minA, float maxA, float minB, float maxB)
         {
+            
             if (minA < minB)
             {
+                
                 return minB - maxA;
+            
             }
             else
             {
+            
                 return minA - maxB;
+        
             }
+        
         }
+
 
         // Calculate the projection of a polygon on an axis and returns it as a [min, max] interval
         public void ProjectPolygon(Vector axis, Polygon polygon, ref float min, ref float max)
         {
-            // To project a point on an axis use the dot product
+
             float d = axis.DotProduct(polygon.Points[0]);
             min = d;
             max = d;
             for (int i = 0; i < polygon.Points.Count; i++)
             {
+
                 d = polygon.Points[i].DotProduct(axis);
                 if (d < min)
                 {
+
                     min = d;
+
                 }
                 else
                 {
+
                     if (d > max)
                     {
+
                         max = d;
+
                     }
+
                 }
+
             }
+
         }
 
         public static void Log(string message)
@@ -204,7 +231,7 @@ namespace Engine2D
                 if (Instance.OnLog != null)
                 {
 
-                    Instance.OnLog(message);//lol
+                    Instance.OnLog(message);
 
                 }
 

@@ -10,9 +10,11 @@ namespace Engine2D
     public struct Vector
     {
 
-        public float X;
+        public float X; 
         public float Y;
 
+
+        
         static public Vector FromPoint(Point p)
         {
 
@@ -27,7 +29,7 @@ namespace Engine2D
         
         }
 
-        public Vector(float x, float y)
+        public Vector(float x, float y) 
         {
         
             this.X = x;
