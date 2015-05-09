@@ -60,6 +60,13 @@ namespace Engine2D
                 return points; 
             
             }
+
+            set
+            {
+
+                points = value;
+
+            }
         
         }
 

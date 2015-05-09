@@ -52,7 +52,7 @@ namespace Engine2D
                     if (r.WillIntersect)
                     {
 
-                        Log(string.Format("Intersection found. ({0}, {1})", p1.ToString(), p2.ToString()));
+                        //Log(string.Format("Intersection found. ({0}, {1})", p1.ToString(), p2.ToString()));
                         collisionTranslation = p1.Rigidbody.Velocity + r.MinimumTranslationVector;
 
 
@@ -60,7 +60,7 @@ namespace Engine2D
 
                     }
 
-                    p1.Polygon.Offset(collisionTranslation);
+                   // p1.Polygon.Offset(collisionTranslation);
                     p1.Position += collisionTranslation;
                 
                 }

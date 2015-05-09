@@ -16,9 +16,12 @@ namespace PhysicsEmulation
 
         PhysicsEngine PhysicsEngine;
         
+
+
         public Form1()
         {
 
+            
             InitializeComponent();
             InitializeLayout();
             this.Paint += new PaintEventHandler(Form1_Paint);
@@ -34,8 +37,6 @@ namespace PhysicsEmulation
             p.Points.Add(new Vector(100, -100));
             p.Points.Add(new Vector(100, 100));
             p.Points.Add(new Vector(-100, 100));
-
-            p.Offset(300, 0);
            
             PhysicsEngine.PhysicsObjects.Add(new PhysicsObject(new Vector(400, 300), p, new Rigidbody()));
 
@@ -44,8 +45,6 @@ namespace PhysicsEmulation
             pg.Points.Add(new Vector(50, -70));
             pg.Points.Add(new Vector(30, 50));
             pg.Points.Add(new Vector(-60, 40));
-
-            pg.Offset(400, 200);
             
             PhysicsEngine.PhysicsObjects.Add(new PhysicsObject(new Vector(100, 200), pg, new Rigidbody()));
 
@@ -96,46 +95,49 @@ namespace PhysicsEmulation
         void Form1_Paint(object sender, PaintEventArgs e)
         {
             
-            PhysicsEngine.PhysicsObjects[0].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 4.5f;
-            PhysicsEngine.PhysicsObjects[1].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 4.5f;
+                PhysicsEngine.PhysicsObjects[0].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 4.5f;
+                PhysicsEngine.PhysicsObjects[1].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 4.5f;
 
-            //PhysicsEngine.PhysicsObjects[0].Polygon.Offset(PhysicsSettings.Gravity * 0.016f * 5.0f);
+                //PhysicsEngine.PhysicsObjects[0].Polygon.Offset(PhysicsSettings.Gravity * 0.016f * 5.0f);
 
-            /*foreach (PhysicsObject po in PhysicsEngine.PhysicsObjects)
-            {
-
-                po.Polygon.BuildEdges();
-
-            }*/
-            PhysicsEngine.Update();
-
-            foreach (PhysicsObject p in PhysicsEngine.PhysicsObjects)
-            {
-
-                for (int i = 0; i < p.Polygon.Points.Count; i++)
+                /*foreach (PhysicsObject po in PhysicsEngine.PhysicsObjects)
                 {
 
-                    Point p1, p2;
-                    if (i == p.Polygon.Points.Count - 1)
+                    po.Polygon.BuildEdges();
+
+                }*/
+            
+                PhysicsEngine.Update();
+          
+                foreach (PhysicsObject p in PhysicsEngine.PhysicsObjects)
+                {
+
+                    for (int i = 0; i < p.Polygon.Points.Count; i++)
                     {
 
-                        p1 = p.Polygon.Points[i];
-                        p2 = p.Polygon.Points[0];
-                        e.Graphics.DrawLine(new Pen(Color.FromArgb(200, 0, 0), 5.0f), p1, p2);
+                        Point p1, p2;
+                        if (i == p.Polygon.Points.Count - 1)
+                        {
 
-                    }
-                    else
-                    {
-                        //k
-                        p1 = p.Polygon.Points[i];
-                        p2 = p.Polygon.Points[i+1];
-                        e.Graphics.DrawLine(new Pen(Color.FromArgb(0, 200, 0), 5.0f), p1, p2);
+                            p1 = p.Polygon.Points[i];
+                            p2 = p.Polygon.Points[0];
+                            e.Graphics.DrawLine(new Pen(Color.FromArgb(200, 0, 0), 5.0f), p1, p2);
+
+                        }
+                        else
+                        {
+                            //k
+                            p1 = p.Polygon.Points[i];
+                            p2 = p.Polygon.Points[i + 1];
+                            e.Graphics.DrawLine(new Pen(Color.FromArgb(0, 200, 0), 5.0f), p1, p2);
+
+                        }
 
                     }
 
                 }
 
-            }
+            
             label1.Text = "Polygon 1 Position: " + PhysicsEngine.PhysicsObjects[0].Position;
             label2.Text = "Polygon 2 Position: " + PhysicsEngine.PhysicsObjects[1].Position;
 
@@ -144,12 +146,31 @@ namespace PhysicsEmulation
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
-            float x, y;
-            x = MousePosition.X;
-            y = MousePosition.Y;
-            Vector v = new Vector(x, y);
-            //label3.Text = Convert.ToString(MousePosition);
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+
+                //spawn g2g
+
+            }
+            lastClick = e;
+
+        }
+        
+        //cool. now um not expecting this to work right now xD xD
+
+        MouseEventArgs lastClick = null;
+        private void Form1_DoubleClick(object sender, EventArgs e)
+        {
+            //what DOUBLE CLICK  lOxLD
+            //kind of a hacky workaround but a double click should be in the same position I think so it should work
+            Vector v = new Vector((float)lastClick.X, (float)lastClick.Y);
+            label3.Text = Convert.ToString(MousePosition);
             PhysicsEngine.PhysicsObjects[1].Position = v;
+            PhysicsEngine.PhysicsObjects[1].Angle += 50.0f;//wut
+            PhysicsEngine.Update();
+            float rad = ((float)Math.PI / 180.0f);
+            label3.Text = "Angle:" + PhysicsEngine.PhysicsObjects[1].Angle + "|Cosine:" + Math.Cos(PhysicsEngine.PhysicsObjects[1].Angle * rad).ToString();
+            //maybe use label3 for text wait
 
         }
 
