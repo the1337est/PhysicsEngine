@@ -80,6 +80,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.DoubleClick += new System.EventHandler(this.Form1_DoubleClick);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             this.ResumeLayout(false);
             this.PerformLayout();

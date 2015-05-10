@@ -48,13 +48,13 @@ namespace PhysicsEmulation
             
             PhysicsEngine.PhysicsObjects.Add(new PhysicsObject(new Vector(100, 200), pg, new Rigidbody()));
 
-            p = new Polygon(); 
-            p.Points.Add(new Vector(0, 740));
-            p.Points.Add(new Vector(1024, 740));
-            p.Points.Add(new Vector(1024, 768));
-            p.Points.Add(new Vector(0, 768));
+            Polygon b = new Polygon(); 
+            b.Points.Add(new Vector(0, 740));
+            b.Points.Add(new Vector(1024, 740));
+            b.Points.Add(new Vector(1024, 768));
+            b.Points.Add(new Vector(0, 768));
 
-            PhysicsEngine.PhysicsObjects.Add(new PhysicsObject(new Vector(0,0), p, new Rigidbody()));
+            PhysicsEngine.PhysicsObjects.Add(new PhysicsObject(new Vector(0,0), b, new Rigidbody()));
 
             foreach (PhysicsObject po in PhysicsEngine.PhysicsObjects)
             {
@@ -62,6 +62,7 @@ namespace PhysicsEmulation
                 po.Polygon.BuildEdges();
 
             }
+
             GameTimer.Interval = 16;
             GameTimer.Start();
 
@@ -94,11 +95,11 @@ namespace PhysicsEmulation
 
         void Form1_Paint(object sender, PaintEventArgs e)
         {
-            
-                PhysicsEngine.PhysicsObjects[0].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 4.5f;
-                PhysicsEngine.PhysicsObjects[1].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f * 4.5f;
 
-                //PhysicsEngine.PhysicsObjects[0].Polygon.Offset(PhysicsSettings.Gravity * 0.016f * 5.0f);
+            //PhysicsEngine.PhysicsObjects[0].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f;// *4.5f;
+            //PhysicsEngine.PhysicsObjects[1].Rigidbody.Velocity += PhysicsSettings.Gravity * 0.016f;// *4.5f;
+            //PhysicsEngine.PhysicsObjects[2].Position = PhysicsEngine.PhysicsObjects[2].Position;
+                //PhysicsEngine.PhysicsObjects[0].Polygon.Offset(PhysicsSettings.Gravity * 0.016f * 10.0f);
 
                 /*foreach (PhysicsObject po in PhysicsEngine.PhysicsObjects)
                 {
@@ -126,7 +127,7 @@ namespace PhysicsEmulation
                         }
                         else
                         {
-                            //k
+                            
                             p1 = p.Polygon.Points[i];
                             p2 = p.Polygon.Points[i + 1];
                             e.Graphics.DrawLine(new Pen(Color.FromArgb(0, 200, 0), 5.0f), p1, p2);
@@ -149,28 +150,77 @@ namespace PhysicsEmulation
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
 
-                //spawn g2g
+                
 
             }
             lastClick = e;
 
         }
         
-        //cool. now um not expecting this to work right now xD xD
-
+        
         MouseEventArgs lastClick = null;
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
-            //what DOUBLE CLICK  lOxLD
-            //kind of a hacky workaround but a double click should be in the same position I think so it should work
+        
             Vector v = new Vector((float)lastClick.X, (float)lastClick.Y);
             label3.Text = Convert.ToString(MousePosition);
             PhysicsEngine.PhysicsObjects[1].Position = v;
-            PhysicsEngine.PhysicsObjects[1].Angle += 50.0f;//wut
+            //PhysicsEngine.PhysicsObjects[1].Angle += 50.0f;
             PhysicsEngine.Update();
-            float rad = ((float)Math.PI / 180.0f);
-            label3.Text = "Angle:" + PhysicsEngine.PhysicsObjects[1].Angle + "|Cosine:" + Math.Cos(PhysicsEngine.PhysicsObjects[1].Angle * rad).ToString();
-            //maybe use label3 for text wait
+            //float rad = ((float)Math.PI / 180.0f);
+            //label3.Text = "Angle:" + PhysicsEngine.PhysicsObjects[1].Angle + "|Cosine:" + Math.Cos(PhysicsEngine.PhysicsObjects[1].Angle * rad).ToString();
+
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            int objectId = 1;
+            float speed = 0.2f;
+            float maxv = 2;
+            if (e.KeyCode == Keys.Down)
+            {
+
+                if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X < maxv && PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < maxv)
+                {
+                
+                    Vector v = new Vector(0, speed);
+                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
+                    PhysicsEngine.Update();
+                }
+
+            }
+            
+            if (e.KeyCode == Keys.Up)
+            {
+                if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X < maxv && PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < maxv)
+                {
+                    Vector v = new Vector(0, -speed);
+                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
+                    PhysicsEngine.Update();
+                }
+
+            } 
+            
+            if (e.KeyCode == Keys.Left)
+            {
+                if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X < maxv && PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < maxv)
+                {
+
+                    Vector v = new Vector(-speed, 0);
+                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
+                    PhysicsEngine.Update();
+                }
+
+            } 
+            if (e.KeyCode == Keys.Right)
+            {
+
+                Vector v = new Vector(speed, 0);
+                PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
+                PhysicsEngine.Update();
+
+            }
 
         }
 
