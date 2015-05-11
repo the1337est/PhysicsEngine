@@ -32,15 +32,19 @@ namespace PhysicsEmulation
 
             GameTimer.Tick += new EventHandler(GameTimer_Tick);
 
-            Polygon p = new Polygon();  
+            Polygon p = new Polygon();
+            Polygon pg = new Polygon();
+            Polygon b = new Polygon(); 
+            
+
             p.Points.Add(new Vector(-100, -100));
             p.Points.Add(new Vector(100, -100));
             p.Points.Add(new Vector(100, 100));
             p.Points.Add(new Vector(-100, 100));
            
             PhysicsEngine.PhysicsObjects.Add(new PhysicsObject(new Vector(400, 300), p, new Rigidbody()));
-
-            Polygon pg = new Polygon();
+            
+            
             pg.Points.Add(new Vector(-30, -50));
             pg.Points.Add(new Vector(50, -70));
             pg.Points.Add(new Vector(30, 50));
@@ -48,7 +52,6 @@ namespace PhysicsEmulation
             
             PhysicsEngine.PhysicsObjects.Add(new PhysicsObject(new Vector(100, 200), pg, new Rigidbody()));
 
-            Polygon b = new Polygon(); 
             b.Points.Add(new Vector(0, 740));
             b.Points.Add(new Vector(1024, 740));
             b.Points.Add(new Vector(1024, 768));

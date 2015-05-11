@@ -34,8 +34,8 @@ namespace Engine2D
 
                     Vector distanceFromCenter = Polygon.Points[i] - Position;
                     //Polygon.Points[i] = new Vector(Position.X + (float)(Math.Cos(Angle * rad) * distanceFromCenter.X), Position.Y + (float)(Math.Sin(Angle * rad) * distanceFromCenter.Y));
-                    Polygon.Points[i].X = Position.X + (Polygon.Points[i].X - Position.X) * (float)(Math.Cos(Angle * rad)) - (Polygon.Points[i].Y - Position.Y) * (float)(Math.Sin(Angle * rad));
-                    Polygon.Points[i].Y = Position.Y + ((Polygon.Points[i].Y - Position.Y) * (float)Math.Sin(Angle * rad)) + (Polygon.Points[i].Y - Position.Y) * (float)Math.Cos(Angle * rad);
+                    Polygon.Points[i] = new Vector(Position.X + (Polygon.Points[i].X - Position.X) * (float)(Math.Cos(Angle * rad)) - (Polygon.Points[i].Y - Position.Y) * (float)(Math.Sin(Angle * rad)),
+                    Position.Y + ((Polygon.Points[i].Y - Position.Y) * (float)Math.Sin(Angle * rad)) + (Polygon.Points[i].Y - Position.Y) * (float)Math.Cos(Angle * rad));
                 }
 
                 _Angle = value;
