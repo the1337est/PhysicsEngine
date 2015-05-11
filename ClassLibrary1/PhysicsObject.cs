@@ -36,6 +36,10 @@ namespace Engine2D
                     //Polygon.Points[i] = new Vector(Position.X + (float)(Math.Cos(Angle * rad) * distanceFromCenter.X), Position.Y + (float)(Math.Sin(Angle * rad) * distanceFromCenter.Y));
                     Polygon.Points[i] = new Vector(Position.X + (Polygon.Points[i].X - Position.X) * (float)(Math.Cos(Angle * rad)) - (Polygon.Points[i].Y - Position.Y) * (float)(Math.Sin(Angle * rad)),
                     Position.Y + ((Polygon.Points[i].Y - Position.Y) * (float)Math.Sin(Angle * rad)) + (Polygon.Points[i].Y - Position.Y) * (float)Math.Cos(Angle * rad));
+<<<<<<< HEAD
+=======
+                
+>>>>>>> origin/master
                 }
 
                 _Angle = value;
