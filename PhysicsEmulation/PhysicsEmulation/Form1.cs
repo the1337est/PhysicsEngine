@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 using Engine2D;
 
 namespace PhysicsEmulation
@@ -16,9 +17,10 @@ namespace PhysicsEmulation
 
         PhysicsEngine PhysicsEngine;
 
-        public int objectId = 1;
-
-
+        public int objectId = 0;
+        public double taskCount = 0;
+        Stopwatch sw = Stopwatch.StartNew();
+        float framerate = 0.2f;
         public Form1()
         {
 
@@ -30,6 +32,7 @@ namespace PhysicsEmulation
             DoubleBuffered = true;
 
             PhysicsEngine = new PhysicsEngine(Log);
+
 
             GameTimer.Tick += new EventHandler(GameTimer_Tick);
 
@@ -83,7 +86,7 @@ namespace PhysicsEmulation
 
             }
 
-            GameTimer.Interval = 16;
+            GameTimer.Interval = 13;
             GameTimer.Start();
 
         }
@@ -104,13 +107,13 @@ namespace PhysicsEmulation
             MaximumSize = Size;
             MinimumSize = Size;
             ShowIcon = false;
+            
 
         }
 
         void GameTimer_Tick(object sender, EventArgs e)
         {
             this.Invalidate();
-            //this.Update();
         }
 
         void Form1_Paint(object sender, PaintEventArgs e)
@@ -163,7 +166,9 @@ namespace PhysicsEmulation
             label2.Text = "Polygon 2 Position: " + PhysicsEngine.PhysicsObjects[1].Position;
 
             label3.Text = PhysicsEngine.LogMessage;
-            
+            taskCount++;
+            framerate = (float)(taskCount / (sw.ElapsedMilliseconds) * 1000);
+            label4.Text = "Frame Rate: " + System.Math.Round(framerate,2);
             /*int x1, y1;
             x1 = (int)PhysicsEngine.PhysicsObjects[0].Position.X;
             y1 = (int)PhysicsEngine.PhysicsObjects[0].Position.Y;
@@ -321,19 +326,21 @@ namespace PhysicsEmulation
 
         private void object1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            object2ToolStripMenuItem.Checked = false;
-            object1ToolStripMenuItem.Checked = true;
-            objectId = 0;
-
+            
+                object1ToolStripMenuItem.Checked = true;
+                object2ToolStripMenuItem.Checked = false;
+                objectId = 0;
+            
         }
 
         private void object2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            object1ToolStripMenuItem.Checked = false;
-            object2ToolStripMenuItem.Checked = true;
-            objectId = 1;
-
+            
+                object1ToolStripMenuItem.Checked = false;
+                object2ToolStripMenuItem.Checked = true;
+                objectId = 1;
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -346,6 +353,79 @@ namespace PhysicsEmulation
 
             this.Close();
 
+
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+            Form2 f = new Form2();
+            f.Show();
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void positionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (!positionsToolStripMenuItem.Checked)
+            {
+                positionsToolStripMenuItem.Checked = true;                
+                label1.Visible = true;
+                label2.Visible = true;
+            
+            }
+            else
+            {
+                positionsToolStripMenuItem.Checked = false;
+
+                label1.Visible = false;
+                label2.Visible = false;
+
+            }
+
+        }
+
+        private void collsionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (!collsionsToolStripMenuItem.Checked)
+            {
+
+                collsionsToolStripMenuItem.Checked = true;
+                label3.Visible = true;
+
+            }
+            else
+            {
+                collsionsToolStripMenuItem.Checked = false;
+                label3.Visible = false;
+
+            }
+
+
+        }
+
+        private void frameRateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!frameRateToolStripMenuItem.Checked)
+            {
+
+                frameRateToolStripMenuItem.Checked = true;
+                label4.Visible = true;
+
+            }
+            else
+            {
+                frameRateToolStripMenuItem.Checked = false;
+                label4.Visible = false;
+
+            }
 
         }
 

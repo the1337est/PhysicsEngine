@@ -18,3 +18,4 @@ C:\Users\TheOne\Documents\GitHub\PhysicsEngine\PhysicsEmulation\PhysicsEmulation
 C:\Users\TheOne\Documents\GitHub\PhysicsEngine\PhysicsEmulation\PhysicsEmulation\bin\Debug\Engine2D.dll
 C:\Users\TheOne\Documents\GitHub\PhysicsEngine\PhysicsEmulation\PhysicsEmulation\bin\Debug\Engine2D.pdb
 C:\Users\TheOne\Documents\GitHub\PhysicsEngine\PhysicsEmulation\PhysicsEmulation\obj\x86\Debug\PhysicsEmulation.csprojResolveAssemblyReference.cache
+C:\Users\TheOne\Documents\GitHub\PhysicsEngine\PhysicsEmulation\PhysicsEmulation\obj\x86\Debug\PhysicsEmulation.Form2.resources

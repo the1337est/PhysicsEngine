@@ -38,8 +38,14 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.object1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.object2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.positionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.collsionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label4 = new System.Windows.Forms.Label();
+            this.frameRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +74,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(784, 24);
@@ -79,7 +86,8 @@
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2,
-            this.resetToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.exitToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(50, 20);
             this.toolStripMenuItem1.Text = "Menu";
@@ -110,6 +118,48 @@
             this.object2ToolStripMenuItem.Text = "Object 2";
             this.object2ToolStripMenuItem.Click += new System.EventHandler(this.object2ToolStripMenuItem_Click);
             // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.positionsToolStripMenuItem,
+            this.collsionsToolStripMenuItem,
+            this.frameRateToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // positionsToolStripMenuItem
+            // 
+            this.positionsToolStripMenuItem.Checked = true;
+            this.positionsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.positionsToolStripMenuItem.Name = "positionsToolStripMenuItem";
+            this.positionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.positionsToolStripMenuItem.Text = "Positions";
+            this.positionsToolStripMenuItem.Click += new System.EventHandler(this.positionsToolStripMenuItem_Click);
+            // 
+            // collsionsToolStripMenuItem
+            // 
+            this.collsionsToolStripMenuItem.Checked = true;
+            this.collsionsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.collsionsToolStripMenuItem.Name = "collsionsToolStripMenuItem";
+            this.collsionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.collsionsToolStripMenuItem.Text = "Collsions";
+            this.collsionsToolStripMenuItem.Click += new System.EventHandler(this.collsionsToolStripMenuItem_Click);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -118,12 +168,22 @@
             this.label3.Size = new System.Drawing.Size(0, 13);
             this.label3.TabIndex = 8;
             // 
-            // resetToolStripMenuItem
+            // label4
             // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resetToolStripMenuItem.Text = "Exit";
-            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(16, 537);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.TabIndex = 9;
+            // 
+            // frameRateToolStripMenuItem
+            // 
+            this.frameRateToolStripMenuItem.Checked = true;
+            this.frameRateToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.frameRateToolStripMenuItem.Name = "frameRateToolStripMenuItem";
+            this.frameRateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.frameRateToolStripMenuItem.Text = "Frame Rate";
+            this.frameRateToolStripMenuItem.Click += new System.EventHandler(this.frameRateToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -132,6 +192,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -161,7 +222,13 @@
         private System.Windows.Forms.ToolStripMenuItem object1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem object2ToolStripMenuItem;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem positionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem collsionsToolStripMenuItem;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripMenuItem frameRateToolStripMenuItem;
     }
 }
 
