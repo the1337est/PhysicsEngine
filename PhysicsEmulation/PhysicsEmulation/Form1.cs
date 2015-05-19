@@ -15,7 +15,8 @@ namespace PhysicsEmulation
     {
 
         PhysicsEngine PhysicsEngine;
-        
+
+        public int objectId = 1;
 
 
         public Form1()
@@ -178,16 +179,33 @@ namespace PhysicsEmulation
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
 
-            int objectId = 1;
-            float speed = 0.2f;
-            float maxv = 2;
-            if (e.KeyCode == Keys.Down)
+            if (object1ToolStripMenuItem.Checked)
             {
 
+                objectId = 0;
+        
+            }
+
+            else if (object2ToolStripMenuItem.Checked)
+            {
+
+                
+                objectId = 1;
+
+            }
+
+            float speed = 0.2f;
+            float maxv = 3.0f;
+            if (e.KeyCode == Keys.Down)
+            {
+                if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < 0)
+                {
+                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y = 0;
+                }
                 if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X < maxv && PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < maxv)
                 {
-                
-                    Vector v = new Vector(0, speed);
+
+                    Vector v = new Vector(0, (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y + speed));
                     PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
                     PhysicsEngine.Update();
                 }
@@ -196,36 +214,82 @@ namespace PhysicsEmulation
             
             if (e.KeyCode == Keys.Up)
             {
+                if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y > 0)
+                {
+                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y = 0;
+                }
                 if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X < maxv && PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < maxv)
                 {
-                    Vector v = new Vector(0, -speed);
+
+                    Vector v = new Vector(0, -(PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y) - speed);
                     PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
                     PhysicsEngine.Update();
+                
                 }
 
             } 
             
             if (e.KeyCode == Keys.Left)
             {
+                if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X > 0)
+                {
+
+                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X = 0;
+                
+                }
+                
                 if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X < maxv && PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < maxv)
                 {
 
-                    Vector v = new Vector(-speed, 0);
+                    Vector v = new Vector(-(PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X) - speed, 0);
                     PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
-                    PhysicsEngine.Update();
+                    PhysicsEngine.Update(); 
+                
                 }
 
             } 
             if (e.KeyCode == Keys.Right)
             {
+                if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X < 0)
+                {
 
-                Vector v = new Vector(speed, 0);
-                PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
-                PhysicsEngine.Update();
+                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X = 0;
+                
+                }
+                if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X < maxv && PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < maxv)
+                {
 
+                    Vector v = new Vector((PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X + speed), 0);
+                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
+                    PhysicsEngine.Update();
+                }
             }
 
         }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+
+            object1ToolStripMenuItem.CheckOnClick = true;
+            object2ToolStripMenuItem.CheckOnClick = true;
+
+            if (object1ToolStripMenuItem.Checked)
+            {
+                object2ToolStripMenuItem.Checked = false;
+            }
+            else if (object2ToolStripMenuItem.Checked)
+            {
+                object1ToolStripMenuItem.Checked = false;
+            }
+
+        }
+        
+
+       
+        
+
+
 
     }
 

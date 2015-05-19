@@ -99,18 +99,14 @@ namespace Engine2D
 
                 }
 
-
-
                 // ===== 1. Find if the polygons are currently intersecting =====
 
                 Vector axis = new Vector(-edge.Y, edge.X);
                 axis.Normalize();
-
                 // Find the projection of the polygon on the current axis
                 float minA = 0; float minB = 0; float maxA = 0; float maxB = 0;
                 ProjectPolygon(axis, polygonA, ref minA, ref maxA);
                 ProjectPolygon(axis, polygonB, ref minB, ref maxB);
-
                 // Check if the polygon projections are currentlty intersecting
                 if (IntervalDistance(minA, maxA, minB, maxB) > 0) result.Intersect = false;
 
@@ -118,7 +114,6 @@ namespace Engine2D
 
                 // Project the velocity on the current axis
                 float velocityProjection = axis.DotProduct(velocity);
-
                 // Get the projection of polygon A during the movement
                 if (velocityProjection < 0)
                 {
@@ -132,12 +127,9 @@ namespace Engine2D
                     maxA += velocityProjection;
 
                 }
-
-                // Do the same test as above for the new projection
                 float intervalDistance = IntervalDistance(minA, maxA, minB, maxB);
                 if (intervalDistance > 0) result.WillIntersect = false;
 
-                // If the polygons are not intersecting and won't intersect, exit the loop
                 if (!result.Intersect && !result.WillIntersect) break;
 
                 // Check if the current interval distance is the minimum one. If so store
