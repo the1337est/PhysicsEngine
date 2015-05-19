@@ -18,6 +18,10 @@ namespace Engine2D
 
         public event OnLogHandler OnLog;
 
+        public string LogMessage = "";
+
+        int count = 0;
+
         public PhysicsEngine(OnLogHandler logTarget)
         {
 
@@ -53,9 +57,11 @@ namespace Engine2D
                     {
 
                         //Log(string.Format("Intersection found. ({0}, {1})", p1.ToString(), p2.ToString()));
+                        count++;
+                        LogMessage = string.Format("Collision(s): {0} detected", count);
                         collisionTranslation = p1.Rigidbody.Velocity + r.MinimumTranslationVector;
 
-
+                        count++;
                         p1.Rigidbody.Velocity = new Vector(0, 0);
 
                     }
@@ -145,6 +151,8 @@ namespace Engine2D
                     Vector d = polygonA.Center - polygonB.Center;
                     if (d.DotProduct(translationAxis) < 0) translationAxis = -translationAxis;
 
+                    
+
                 }
 
             }
@@ -153,9 +161,10 @@ namespace Engine2D
             // First moves the polygons by their velocity
             // then move polygonA by MinimumTranslationVector.
             if (result.WillIntersect) result.MinimumTranslationVector = translationAxis * minIntervalDistance;
+            {
 
-            return result;
-        
+                return result;
+            }
         }
 
         // Calculate the distance between [minA, maxA] and [minB, maxB]
