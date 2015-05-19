@@ -233,8 +233,8 @@ namespace PhysicsEmulation
 
             }
             */
-            float speed = 0.2f;
-            float maxv = 1.0f;
+            float speed = 0.05f;
+            float maxv = 0.5f;
             if (e.KeyCode == Keys.Down)
             {
                 if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < 0)
@@ -257,16 +257,17 @@ namespace PhysicsEmulation
                 {
                     PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y = 0;
                 }
-                if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X < maxv && PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < maxv)
+                if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X < maxv && (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y-speed) < maxv)
                 {
 
-                    Vector v = new Vector(0, -(PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y) - speed);
-                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
+                    Vector v = new Vector(0, (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y) - speed);
+                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity = v;
                     PhysicsEngine.Update();
                 
                 }
+                
 
-            } 
+            }
             
             if (e.KeyCode == Keys.Left)
             {
@@ -277,11 +278,11 @@ namespace PhysicsEmulation
                 
                 }
                 
-                if (PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X < maxv && PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < maxv)
+                if ((PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X-speed) < maxv && PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.Y < maxv)
                 {
 
-                    Vector v = new Vector(-(PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X) - speed, 0);
-                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
+                    Vector v = new Vector((PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity.X) - speed, 0);
+                    PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity = v;
                     PhysicsEngine.Update(); 
                 
                 }
@@ -302,6 +303,13 @@ namespace PhysicsEmulation
                     PhysicsEngine.PhysicsObjects[objectId].Rigidbody.Velocity += v;
                     PhysicsEngine.Update();
                 }
+            }
+
+            if (e.KeyCode == Keys.Space)
+            {
+                Vector vec = new Vector(0, 0);
+                PhysicsEngine.PhysicsObjects[0].Rigidbody.Velocity = vec;
+                PhysicsEngine.PhysicsObjects[1].Rigidbody.Velocity = vec;
             }
 
         }

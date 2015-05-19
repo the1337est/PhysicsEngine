@@ -59,6 +59,7 @@ namespace Engine2D
                         //Log(string.Format("Intersection found. ({0}, {1})", p1.ToString(), p2.ToString()));
                         count++;
                         LogMessage = string.Format("Collision(s): {0} detected", count);
+                        
                         collisionTranslation = p1.Rigidbody.Velocity + r.MinimumTranslationVector;
 
                         count++;
